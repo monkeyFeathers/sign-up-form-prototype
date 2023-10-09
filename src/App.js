@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import { SignUpForm } from "./SignUpForm";
+import { SuccessScreen } from "./SuccessScreen";
 
 function App() {
+  const [success, setSuccess] = useState(false);
+
+  const submitHandler = ({ username, password }) => {
+    // send these to the server or whatever you want to do
+    console.log({ username, password });
+    setSuccess(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App">
+      {success ? (
+        <SuccessScreen setSuccess={setSuccess} />
+      ) : (
+        <SignUpForm submitHandler={submitHandler} />
+      )}
+    </main>
   );
 }
 
